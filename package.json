@@ -1,0 +1,31 @@
+{
+  "name": "petstore-api-framework",
+  "version": "1.0.0",
+  "description": "Production-grade API test framework — TypeScript + Playwright",
+  "scripts": {
+    "test": "playwright test --project=full-suite",
+    "test:smoke": "playwright test --project=smoke",
+    "test:regression": "playwright test --project=regression",
+    "test:staging": "cross-env ENV=staging playwright test --project=full-suite",
+    "test:prod": "cross-env ENV=production playwright test --project=full-suite",
+    "test:parallel": "playwright test --project=full-suite --workers=4",
+    "report": "playwright show-report reports/html",
+    "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
+    "allure:open": "allure open reports/allure-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
+    "@typescript-eslint/parser": "^7.9.0",
+    "allure-commandline": "^2.41.0",
+    "allure-playwright": "^3.0.3",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  }
+}

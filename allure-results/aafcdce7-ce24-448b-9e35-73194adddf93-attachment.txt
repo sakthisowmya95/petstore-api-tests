@@ -1,0 +1,5 @@
+[2026-05-22T10:30:31.412Z] [INFO] [PetService] Finding pets by status
+{
+  "status": "sold"
+}
+[2026-05-22T10:30:32.126Z] [INFO] [HttpClient] ← GET pet/findByStatus | 200 | 713ms

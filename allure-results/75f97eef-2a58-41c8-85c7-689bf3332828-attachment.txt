@@ -1,0 +1,15 @@
+[2026-05-22T10:27:08.026Z] [INFO] [PetService] Creating pet
+{
+  "name": "AutoPet_1_1779445628026",
+  "status": "pending"
+}
+[2026-05-22T10:27:08.980Z] [INFO] [HttpClient] ← POST pet | 200 | 951ms
+[2026-05-22T10:27:08.991Z] [INFO] [PetService] Pet created
+{
+  "id": 670077
+}
+[2026-05-22T10:27:09.246Z] [INFO] [HttpClient] ← DELETE pet/670077 | 200 | 231ms
+[2026-05-22T10:27:09.247Z] [INFO] [PetService] Cleanup: deleted pet
+{
+  "id": 670077
+}

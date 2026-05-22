@@ -1,0 +1,80 @@
+name: Petstore API Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "staging"
+        type: choice
+        options: [development, staging, production]
+      suite:
+        description: "Test suite"
+        required: true
+        default: "full-suite"
+        type: choice
+        options: [full-suite, smoke, regression]
+
+jobs:
+  test:
+    name: "${{ github.event.inputs.suite || 'full-suite' }} | ${{ github.event.inputs.environment || 'staging' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run tests
+        env:
+          ENV: ${{ github.event.inputs.environment || 'staging' }}
+          BASE_URL: ${{ secrets.BASE_URL || 'https://petstore.swagger.io/v2/' }}
+          CI: true
+        run: |
+          npx playwright test \
+            --project="${{ github.event.inputs.suite || 'full-suite' }}" \
+            --shard=${{ matrix.shard }}/4 \
+            --reporter=blob
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blob-${{ matrix.shard }}
+          path: blob-report/
+          retention-days: 7
+
+  merge-reports:
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          path: all-blobs
+          pattern: blob-*
+      - run: npx playwright merge-reports --reporter html ./all-blobs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: html-report
+          path: playwright-report/
+          retention-days: 30

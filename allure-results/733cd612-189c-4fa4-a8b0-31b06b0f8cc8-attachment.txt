@@ -1,0 +1,16 @@
+[2026-05-22T10:30:30.321Z] [INFO] [PetService] Creating pet
+{
+  "name": "AutoPet_5_1779445830321",
+  "status": "available"
+}
+[2026-05-22T10:30:30.546Z] [INFO] [HttpClient] ← POST pet | 200 | 225ms
+[2026-05-22T10:30:30.548Z] [INFO] [PetService] Pet created
+{
+  "id": 393550
+}
+[2026-05-22T10:30:30.549Z] [INFO] [PetService] Deleting pet
+{
+  "id": 393550
+}
+[2026-05-22T10:30:30.780Z] [INFO] [HttpClient] ← DELETE pet/393550 | 200 | 230ms
+[2026-05-22T10:30:31.009Z] [INFO] [HttpClient] ← GET pet/393550 | 404 | 228ms

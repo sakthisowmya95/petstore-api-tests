@@ -1,0 +1,25 @@
+[2026-05-22T10:30:28.804Z] [INFO] [PetService] Creating pet
+{
+  "name": "FixturePet",
+  "status": "available"
+}
+[2026-05-22T10:30:29.036Z] [INFO] [HttpClient] ← POST pet | 200 | 231ms
+[2026-05-22T10:30:29.039Z] [INFO] [PetService] Pet created
+{
+  "id": 541808
+}
+[2026-05-22T10:30:29.040Z] [INFO] [Fixtures] existingPet fixture ready
+{
+  "id": 541808
+}
+[2026-05-22T10:30:29.041Z] [INFO] [PetService] Updating pet
+{
+  "id": 541808,
+  "name": "UpdatedBuddy"
+}
+[2026-05-22T10:30:29.273Z] [INFO] [HttpClient] ← PUT pet | 200 | 232ms
+[2026-05-22T10:30:29.523Z] [INFO] [HttpClient] ← DELETE pet/541808 | 200 | 233ms
+[2026-05-22T10:30:29.525Z] [INFO] [PetService] Cleanup: deleted pet
+{
+  "id": 541808
+}

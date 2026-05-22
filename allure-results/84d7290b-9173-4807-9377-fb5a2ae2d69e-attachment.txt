@@ -1,0 +1,5 @@
+[2026-05-22T10:30:28.485Z] [INFO] [PetService] Fetching pet
+{
+  "id": 987654321123
+}
+[2026-05-22T10:30:28.733Z] [INFO] [HttpClient] ← GET pet/987654321123 | 404 | 247ms

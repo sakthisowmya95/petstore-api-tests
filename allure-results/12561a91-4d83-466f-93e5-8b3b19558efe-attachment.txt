@@ -1,0 +1,15 @@
+[2026-05-22T10:27:07.906Z] [INFO] [PetService] Creating pet
+{
+  "name": "Buddy",
+  "status": "available"
+}
+[2026-05-22T10:27:08.928Z] [INFO] [HttpClient] ← POST pet | 200 | 1018ms
+[2026-05-22T10:27:08.935Z] [INFO] [PetService] Pet created
+{
+  "id": 700179
+}
+[2026-05-22T10:27:09.220Z] [INFO] [HttpClient] ← DELETE pet/700179 | 200 | 237ms
+[2026-05-22T10:27:09.221Z] [INFO] [PetService] Cleanup: deleted pet
+{
+  "id": 700179
+}

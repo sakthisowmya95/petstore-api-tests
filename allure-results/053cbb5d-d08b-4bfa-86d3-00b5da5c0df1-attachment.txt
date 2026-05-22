@@ -1,0 +1,1 @@
+[2026-05-22T10:27:13.097Z] [INFO] [HttpClient] ← DELETE pet/999888777 | 404 | 227ms

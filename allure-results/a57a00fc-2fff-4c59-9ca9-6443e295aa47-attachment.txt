@@ -1,0 +1,20 @@
+[2026-05-22T10:31:47.947Z] [INFO] [PetService] Creating pet
+{
+  "name": "IntegrityPet",
+  "status": "sold"
+}
+[2026-05-22T10:31:48.206Z] [INFO] [HttpClient] ← POST pet | 200 | 258ms
+[2026-05-22T10:31:48.210Z] [INFO] [PetService] Pet created
+{
+  "id": 648222
+}
+[2026-05-22T10:31:48.211Z] [INFO] [PetService] Fetching pet
+{
+  "id": 648222
+}
+[2026-05-22T10:31:48.454Z] [INFO] [HttpClient] ← GET pet/648222 | 200 | 242ms
+[2026-05-22T10:31:48.729Z] [INFO] [HttpClient] ← DELETE pet/648222 | 200 | 247ms
+[2026-05-22T10:31:48.730Z] [INFO] [PetService] Cleanup: deleted pet
+{
+  "id": 648222
+}

@@ -1,0 +1,30 @@
+[2026-05-22T10:31:48.834Z] [INFO] [PetService] Creating pet
+{
+  "name": "FixturePet",
+  "status": "available"
+}
+[2026-05-22T10:31:49.115Z] [INFO] [HttpClient] ← POST pet | 200 | 279ms
+[2026-05-22T10:31:49.117Z] [INFO] [PetService] Pet created
+{
+  "id": 630360
+}
+[2026-05-22T10:31:49.118Z] [INFO] [Fixtures] existingPet fixture ready
+{
+  "id": 630360
+}
+[2026-05-22T10:31:49.119Z] [INFO] [PetService] Updating pet
+{
+  "id": 630360,
+  "name": "ReflectedUpdate"
+}
+[2026-05-22T10:31:49.356Z] [INFO] [HttpClient] ← PUT pet | 200 | 237ms
+[2026-05-22T10:31:49.359Z] [INFO] [PetService] Fetching pet
+{
+  "id": 630360
+}
+[2026-05-22T10:31:49.598Z] [INFO] [HttpClient] ← GET pet/630360 | 200 | 238ms
+[2026-05-22T10:31:49.847Z] [INFO] [HttpClient] ← DELETE pet/630360 | 200 | 243ms
+[2026-05-22T10:31:49.848Z] [INFO] [PetService] Cleanup: deleted pet
+{
+  "id": 630360
+}
