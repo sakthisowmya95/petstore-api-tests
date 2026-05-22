@@ -34,12 +34,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
+
       - run: npm ci
+
       - run: npx playwright install --with-deps chromium
+
       - name: Run tests
         env:
           ENV: ${{ github.event.inputs.environment || 'staging' }}
@@ -49,13 +53,17 @@ jobs:
           npx playwright test \
             --project="${{ github.event.inputs.suite || 'full-suite' }}" \
             --shard=${{ matrix.shard }}/4 \
-            --reporter=blob
-      - uses: actions/upload-artifact@v4
+            --reporter=blob \
+            --output=blob-report
+
+      - name: Upload blob report
+        uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: blob-${{ matrix.shard }}
+          name: blob-report-${{ matrix.shard }}
           path: blob-report/
           retention-days: 7
+          if-no-files-found: warn
 
   merge-reports:
     needs: test
@@ -63,17 +71,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
+
       - run: npm ci
-      - uses: actions/download-artifact@v4
+
+      - name: Download blob reports
+        uses: actions/download-artifact@v4
         with:
           path: all-blobs
-          pattern: blob-*
-      - run: npx playwright merge-reports --reporter html ./all-blobs
-      - uses: actions/upload-artifact@v4
+          pattern: blob-report-*
+          merge-multiple: true
+
+      - name: Check blobs exist
+        run: ls -la all-blobs || echo "No blobs found"
+
+      - name: Merge reports
+        run: npx playwright merge-reports --reporter html ./all-blobs
+
+      - name: Upload merged HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: html-report
           path: playwright-report/
